@@ -96,3 +96,10 @@ VALUES
 (24, 'Frida Kahlo', 'shs', 'sequence-24-frida-kahlo.pdf', 'written'),
 (25, 'Camille Claudel', 'shs', 'sequence-25-camille-claudel.pdf', 'written')
 ON CONFLICT DO NOTHING;
+
+-- Prevent duplicate documents if the migration is run more than once.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_student_documents_file_path_unique
+ON student_documents(file_path);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_student_documents_position_unique
+ON student_documents(position);
